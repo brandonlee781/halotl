@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import useGuess from '@/composables/useGuess'
 import { onClickOutside, MaybeElement } from '@vueuse/core'
+import { addDays, formatDuration, intervalToDuration, set } from 'date-fns'
 let showStats = $ref(false)
 let showHowTo = $ref(false)
+let showGameOver = $ref(false)
 
 const howToRef = ref<MaybeElement>(null)
 onClickOutside(howToRef, () => {
@@ -18,14 +20,24 @@ onClickOutside(statsRef, () => {
   }
 })
 
+const gameOverRef = ref<MaybeElement>(null)
+onClickOutside(gameOverRef, () => {
+  if (showStats) {
+    showGameOver = false
+  }
+})
+
 const toggleStats = () => {
   showStats = !showStats
 }
 const toggleHowTo = () => {
   showHowTo = !showHowTo
 }
+const toggleGameOver = () => {
+  showGameOver = !showGameOver
+}
 
-const { stats } = useGuess()
+const { stats, gameOver, answer, guesses, getShareableScore } = useGuess()
 const wins = $computed(() => {
   const history = Object.values(stats.value.history)
   return history.filter(h => h === 'win').length
@@ -36,12 +48,42 @@ const gamesPlayed = $computed(() => {
   return wins + losses.length
 })
 
+watch(gameOver, newVal => {
+  if (newVal) {
+    showGameOver = true
+  }
+})
+
+let time = ref<string>()
 onMounted(() => {
   if (!stats.value.instructionDismissed) {
     showHowTo = true
     stats.value.instructionDismissed = true
   }
+  setInterval(() => {
+    nextTick(() => {
+      let duration = intervalToDuration({
+        start: new Date(),
+        end: set(addDays(new Date(), 1), { hours: 0, minutes: 0, seconds: 0 }),
+      })
+      const hours = duration.hours?.toLocaleString('en-us', {
+        minimumIntegerDigits: 2,
+      })
+      const minutes = duration.minutes?.toLocaleString('en-us', {
+        minimumIntegerDigits: 2,
+      })
+      const seconds = duration.seconds?.toLocaleString('en-us', {
+        minimumIntegerDigits: 2,
+      })
+      time.value = `${hours}:${minutes}:${seconds}`
+    })
+  }, 1000)
 })
+
+const getSrc = (image: string) => {
+  const url = new URL(`../assets/images/${image}`, import.meta.url).href
+  return url
+}
 </script>
 
 <template>
@@ -122,6 +164,63 @@ onMounted(() => {
         aria-hidden="true"
         tabindex="-1"
         @click="toggleStats"
+      >
+        <i-mdi-close></i-mdi-close>
+      </button>
+    </div>
+  </div>
+
+  <div v-show="gameOver && showGameOver" class="modal-wrapper">
+    <div class="modal narrow" ref="gameOverRef">
+      <div class="game-over">
+        <div
+          class="success text-center flex flex-col items-center justify-center"
+        >
+          <div class="team-image">
+            <img
+              :src="getSrc(answer.teamImage)"
+              :alt="`${answer.teamName} logo`"
+            />
+          </div>
+          <div
+            :class="{
+              results: true,
+              '!border-b-red-900 !border-t-red-900': gameOver === 'lose',
+            }"
+          >
+            <template v-if="gameOver === 'lose'">
+              <h3>Sorry, the correct answer is</h3>
+              <h2>{{ answer.name }}</h2>
+              <h3>You can try again tomorrow!</h3>
+            </template>
+            <template v-else-if="gameOver === 'win'">
+              <h3>Great Job!</h3>
+              <h2>{{ answer.name }}</h2>
+              <h3>You solved in {{ guesses.length }} guess</h3>
+            </template>
+            <div class="share-button">
+              <button
+                class="bg-hcsBlue px-8 py-4 mt-4 text-white"
+                @click="getShareableScore"
+              >
+                Share My Score
+              </button>
+            </div>
+          </div>
+          <div class="countdown-timer text-hcsBlue">
+            <div>
+              New mystery player in
+              <div class="timer"> {{ time }} </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="close-button bg-hcsBlue text-white"
+        aria-hidden="true"
+        tabindex="-1"
+        @click="toggleGameOver"
       >
         <i-mdi-close></i-mdi-close>
       </button>
@@ -247,10 +346,53 @@ onMounted(() => {
   justify-content: center;
 }
 
+.team-image {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  width: 100%;
+  img {
+    height: 50px;
+    width: auto;
+  }
+}
+
+.results {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  padding: 40px 10px 30px;
+  color: #4e78ba;
+}
+
+.results h3 {
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0;
+}
+.results h2 {
+  font-size: 21px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 10px 0;
+  font-weight: 800;
+}
+
+.countdown-timer {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.countdown-timer .timer {
+  margin-top: 2px;
+  font-size: 24px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 800;
+}
+
 @media (min-width: 768px) {
   .btn {
     font-size: 14px;
-    padding: 20px 30px;
   }
 
   .modal {
@@ -267,6 +409,13 @@ onMounted(() => {
 
   .stats p {
     font-size: 54px;
+  }
+
+  .results h3 {
+    font-size: 19px;
+  }
+  .results h2 {
+    font-size: 28px;
   }
 }
 </style>

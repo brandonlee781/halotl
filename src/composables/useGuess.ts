@@ -38,6 +38,7 @@ export default function () {
   onMounted(() => {
     if (answerIndex !== stats.value.dayLastPlayed) {
       guesses.value = []
+      gameOver.value = false
     } else if (stats.value.history[answerIndex]) {
       gameOver.value = stats.value.history[answerIndex]
     }
@@ -69,11 +70,43 @@ export default function () {
     stats.value.history[answerIndex] = gameOver.value
   })
 
+  const compare = (guess: Player, ans: Player, key: keyof Player) => {
+    const answerVal = ans[key]! as number
+    const diff = answerVal - (guess[key] as number)
+    const close = Math.abs(diff) <= answerVal * 0.1
+    if (answerVal === guess[key]) return '🟩'
+    if (close) return '🟨'
+    return '⬛'
+  }
+
+  const getShareableScore = async () => {
+    let str = `Halotl ${answerIndex} - ${guesses.value.length}/8\n\n`
+    guesses.value.forEach(guess => {
+      let guessStr = ''
+      if (guess.name === answer.name) guessStr += '🟩'
+      else if (guess.region === answer.region) guessStr += '🟨'
+      else guessStr += '⬛'
+
+      guessStr += compare(guess, answer, 'kills')
+      guessStr += compare(guess, answer, 'assists')
+      guessStr += compare(guess, answer, 'damageDealt')
+      guessStr += compare(guess, answer, 'killsPowerWeapons')
+      guessStr += compare(guess, answer, 'flagCaptures')
+      guessStr += compare(guess, answer, 'oddballTotalTime')
+      guessStr += '\n'
+      str += guessStr
+    })
+    navigator.clipboard.writeText(str).then(() => {
+      alert('Copied to clipboard')
+    })
+  }
+
   return {
     gameOver,
     answer,
     guesses,
     checkGuess,
     stats,
+    getShareableScore,
   }
 }
