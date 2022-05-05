@@ -4,8 +4,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Combobox: typeof import('./src/components/Combobox.vue')['default']
-    ComboBox: typeof import('./src/components/ComboBox.vue')['default']
     GameTable: typeof import('./src/components/GameTable/GameTable.vue')['default']
     GameTableBody: typeof import('./src/components/GameTable/GameTableBody.vue')['default']
     GameTableBodyCell: typeof import('./src/components/GameTable/GameTableBodyCell.vue')['default']
@@ -15,9 +13,6 @@ declare module 'vue' {
     GameTableRow: typeof import('./src/components/GameTable/GameTableRow.vue')['default']
     GameTableTeamCell: typeof import('./src/components/GameTable/GameTableTeamCell.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    IMdiArrowDown: typeof import('~icons/mdi/arrow-down')['default']
-    IMdiArrowUp: typeof import('~icons/mdi/arrow-up')['default']
-    IMdiClose: typeof import('~icons/mdi/close')['default']
     PlayerInput: typeof import('./src/components/PlayerInput.vue')['default']
     TheHeader: typeof import('./src/components/TheHeader.vue')['default']
     TheInformation: typeof import('./src/components/TheInformation.vue')['default']
