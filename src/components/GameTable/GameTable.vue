@@ -1,17 +1,24 @@
 <template>
-  <div class="game-table">
-    <GameTableHead></GameTableHead>
-    <GameTableBody></GameTableBody>
+  <div class="container">
+    <div class="game-table">
+      <GameTableHead></GameTableHead>
+      <GameTableBody></GameTableBody>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
 <style>
+.container {
+  max-width: 940px;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 .game-table {
   position: relative;
-  max-width: 960px;
-  margin: 0 auto;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {

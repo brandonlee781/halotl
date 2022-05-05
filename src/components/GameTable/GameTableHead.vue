@@ -17,6 +17,8 @@
 
 <style>
 .game-table__head {
+  margin: 0 -20px;
+  padding: 0 20px;
   box-shadow: 0 5px 30px rgb(0 0 0 / 30%);
   overflow-x: hidden;
   position: relative;

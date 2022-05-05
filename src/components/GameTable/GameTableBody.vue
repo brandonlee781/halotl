@@ -18,7 +18,10 @@ watch(
 </script>
 
 <template>
-  <div ref="tableBody" class="game-table__body">
+  <div
+    ref="tableBody"
+    :class="{ 'game-table__body': true, scrolled: guesses.length >= 4 }"
+  >
     <GameTableBodyRow
       v-for="(guess, index) in guesses"
       :key="guess.playerID"
@@ -43,6 +46,11 @@ watch(
   overflow-x: visible;
   overflow-y: scroll;
   margin: 0 -20px;
+  scrollbar-width: none;
+}
+.game-table__body::-webkit-scrollbar {
+  background: transparent;
+  width: 0;
 }
 
 .game-table__body .game-table__row .game-table__cell > div {
@@ -54,7 +62,7 @@ watch(
   .game-table__body {
     margin: initial;
     max-height: calc(100vh - 620px);
-    overflow: auto;
+    overflow-y: auto;
   }
 
   .game-table__body .game-table__row {
