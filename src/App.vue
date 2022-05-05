@@ -10,6 +10,7 @@ const { answer, guesses } = useGuess()
   <TheHeader></TheHeader>
   <PlayerInput />
   <GameTable v-if="guesses?.length"></GameTable>
+  <ReloadPrompt />
 </template>
 
 <style>

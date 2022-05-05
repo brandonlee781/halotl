@@ -12,11 +12,8 @@ declare module 'vue' {
     GameTableHead: typeof import('./src/components/GameTable/GameTableHead.vue')['default']
     GameTableRow: typeof import('./src/components/GameTable/GameTableRow.vue')['default']
     GameTableTeamCell: typeof import('./src/components/GameTable/GameTableTeamCell.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    IMdiArrowDown: typeof import('~icons/mdi/arrow-down')['default']
-    IMdiArrowUp: typeof import('~icons/mdi/arrow-up')['default']
-    IMdiClose: typeof import('~icons/mdi/close')['default']
     PlayerInput: typeof import('./src/components/PlayerInput.vue')['default']
+    ReloadPrompt: typeof import('./src/components/ReloadPrompt.vue')['default']
     TheHeader: typeof import('./src/components/TheHeader.vue')['default']
     TheInformation: typeof import('./src/components/TheInformation.vue')['default']
   }
