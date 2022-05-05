@@ -7,13 +7,12 @@ const tableBody = ref<HTMLDivElement>()
 watch(
   () => guesses.value,
   nextVal => {
-    if (tableBody.value) {
-      nextTick(() => {
-        const height = tableBody.value?.scrollHeight || 0
-        tableBody.value!.scrollTop = height
-      })
-    }
-  }
+    nextTick(() => {
+      const height = tableBody.value?.scrollHeight || 0
+      tableBody.value!.scrollTop = height
+    })
+  },
+  { immediate: true }
 )
 </script>
 
