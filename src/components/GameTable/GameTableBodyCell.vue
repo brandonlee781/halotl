@@ -20,16 +20,15 @@ const { answer, gameOver } = useGuess()
 type Comparison = {
   status?: 'correct' | 'close'
   dir?: 'higher' | 'lower'
-  diff: number
 }
 const comparison = $computed<Comparison>(() => {
   const answerVal = answer[props.valueKey]!
   const diff = answerVal - props.value
   const close = Math.abs(diff) <= answerVal * 0.1
-  if (answerVal === props.value) return { status: 'correct', diff }
-  if (diff > 0 && close) return { status: 'close', dir: 'higher', diff }
-  if (diff < 0 && close) return { status: 'close', dir: 'lower', diff }
-  return { status: undefined, diff }
+  if (answerVal === props.value) return { status: 'correct' }
+  if (diff > 0 && close) return { status: 'close', dir: 'higher' }
+  if (diff < 0 && close) return { status: 'close', dir: 'lower' }
+  return { status: undefined, dir: diff > 0 ? 'higher' : 'lower' }
 })
 </script>
 
@@ -37,7 +36,7 @@ const comparison = $computed<Comparison>(() => {
   <GameTableCell :status="(lastRow && gameOver) || comparison.status">
     <div>
       <div class="text"> {{ value }} </div>
-      <div v-if="comparison.status === 'close'" class="dir">
+      <div class="dir">
         <i-mdi-arrow-down v-if="comparison.dir === 'lower'" />
         <i-mdi-arrow-up v-if="comparison.dir === 'higher'" />
       </div>
