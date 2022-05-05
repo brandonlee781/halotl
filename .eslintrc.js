@@ -25,7 +25,7 @@ module.exports = {
     'no-return-assign': 'off',
     'vue/max-len': ['error', { code: 100, ignoreHTMLAttributeValues: true }],
     'max-len': 'off',
-    'import/no-resolved': 'off',
+    'import/no-unresolved': 'off',
     // 'max-len': ['error', { "ignoreStrings": true }]
   },
   globals: {

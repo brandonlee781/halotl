@@ -20,7 +20,7 @@ const close = async () => {
 <template>
   <div
     v-if="offlineReady || needRefresh"
-    class="pwa-toast bg-[#e7ddc9] border-2 border-hcsBlue rounded-lg"
+    class="pwa-toast bg-[#f5f2ec] border-2 border-hcsBlue rounded-lg font-bold"
     role="alert"
   >
     <div class="message">
@@ -29,8 +29,19 @@ const close = async () => {
         New content available, click on reload button to update.
       </span>
     </div>
-    <button v-if="needRefresh" @click="updateServiceWorker()"> Reload </button>
-    <button @click="close"> Close </button>
+    <button
+      class="text-hcsBlue border-2 border-hcsBlue rounded-md"
+      v-if="needRefresh"
+      @click="updateServiceWorker()"
+    >
+      Reload
+    </button>
+    <button
+      class="text-hcsBlue border-2 border-hcsBlue rounded-md"
+      @click="close"
+    >
+      Close
+    </button>
   </div>
 </template>
 
@@ -48,10 +59,8 @@ const close = async () => {
   margin-bottom: 8px;
 }
 .pwa-toast button {
-  border: 1px solid rgba(0, 0, 0, 0.13);
   outline: none;
   margin-right: 5px;
-  border-radius: 2px;
   padding: 3px 10px;
 }
 </style>
