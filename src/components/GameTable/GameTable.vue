@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="game-table-container">
     <div class="game-table">
       <GameTableHead></GameTableHead>
       <GameTableBody></GameTableBody>
@@ -10,7 +10,7 @@
 <script setup lang="ts"></script>
 
 <style>
-.container {
+.game-table-container {
   max-width: 940px;
   overflow: hidden;
   margin: 0 auto;
