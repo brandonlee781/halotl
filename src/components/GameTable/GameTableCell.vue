@@ -18,25 +18,4 @@ defineProps<Props>()
   </div>
 </template>
 
-<style>
-/* .game-table-cell:first-child {
-  border-right: 1px solid #f5f2ec;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  background: 0 0;
-  grid-area: name;
-  justify-content: flex-start;
-  font-size: 18px;
-  font-weight: 700;
-  border: none;
-} */
-
-.game-table-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 12px;
-}
-</style>
+<style></style>

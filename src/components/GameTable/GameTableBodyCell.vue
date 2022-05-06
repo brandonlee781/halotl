@@ -36,7 +36,7 @@ const comparison = $computed<Comparison>(() => {
   <GameTableCell :status="(lastRow && gameOver) || comparison.status">
     <div>
       <div class="text"> {{ value }} </div>
-      <div class="dir">
+      <div class="absolute inset-x-0 mt-1px">
         <i-mdi-arrow-down v-if="comparison.dir === 'lower'" />
         <i-mdi-arrow-up v-if="comparison.dir === 'higher'" />
       </div>
@@ -44,11 +44,4 @@ const comparison = $computed<Comparison>(() => {
   </GameTableCell>
 </template>
 
-<style scoped>
-.dir {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-top: 1px;
-}
-</style>
+<style scoped></style>

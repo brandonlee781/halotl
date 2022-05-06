@@ -100,7 +100,7 @@ const { gameOver } = useGuess()
   padding: 14px 8px;
 }
 
-@media (min-width: 768px) {
+@screen md {
   .game-table__row {
     background: 0 0;
     padding: initial;

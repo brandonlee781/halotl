@@ -1,6 +1,6 @@
 <template>
-  <div class="game-table-container">
-    <div class="game-table">
+  <div class="max-w-[940px] overflow-hidden mx-auto px-20px">
+    <div class="relative z-1 md:overflow-hidden">
       <GameTableHead></GameTableHead>
       <GameTableBody></GameTableBody>
     </div>
@@ -9,25 +9,4 @@
 
 <script setup lang="ts"></script>
 
-<style>
-.game-table-container {
-  max-width: 940px;
-  overflow: hidden;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-.game-table {
-  position: relative;
-  z-index: 1;
-}
-
-@media (min-width: 768px) {
-  .game-table {
-    overflow: hidden;
-  }
-}
-
-.game-table-body {
-  min-height: 140px;
-}
-</style>
+<style></style>

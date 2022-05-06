@@ -34,7 +34,7 @@
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@screen md {
   .game-table__head {
     padding: initial;
     margin: initial;

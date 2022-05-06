@@ -29,5 +29,6 @@ export default defineConfig({
     },
     'btn-close':
       'absolute h-[36px] w-[36px] top-0 right-0 font-bold text-white uppercase cursor-pointer bg-hcsBlue md:font-14px',
+    'team-image': 'block mx-auto w-50px h-50px object-contain',
   },
 })

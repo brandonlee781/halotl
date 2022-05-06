@@ -52,7 +52,7 @@ const getSrc = (image: string) => {
         >
           <div class="flex-center py-4 w-full">
             <img
-              class="h-50px w-auto"
+              class="time-image"
               :src="getSrc(answer.teamImage)"
               :alt="`${answer.teamName} logo`"
             />

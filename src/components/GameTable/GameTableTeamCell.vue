@@ -35,12 +35,4 @@ const getSrc = (image: string) => {
   </GameTableCell>
 </template>
 
-<style scoped>
-.team-image {
-  display: block;
-  margin: 0 auto;
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-}
-</style>
+<style scoped></style>

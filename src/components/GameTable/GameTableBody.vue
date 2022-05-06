@@ -57,7 +57,7 @@ watch(
   padding: 14px 8px;
 }
 
-@media (min-width: 768px) {
+@screen md {
   .game-table__body {
     margin: initial;
     max-height: calc(100vh - 620px);
