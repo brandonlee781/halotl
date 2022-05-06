@@ -14,8 +14,18 @@ const getIndex = () => {
 }
 const answerIndex = getIndex()
 
+const encode = (str: string) => {
+  let number = '0x'
+  for (let i = 0; i < str.length; i++) {
+    number += str.charCodeAt(i).toString(16)
+  }
+  return parseInt(number)
+}
+
 const sortedStats = [...statsJson].sort((a, b) => {
-  return a.key - b.key
+  const aKey = encode(a.name + a.teamName + a.map)
+  const bKey = encode(b.name + b.teamName + b.map)
+  return aKey - bKey
 })
 
 const answer = sortedStats[getIndex()]
