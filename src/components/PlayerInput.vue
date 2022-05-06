@@ -34,6 +34,7 @@ const enterGuess = (player: Player) => {
         type="text"
         role="combobox"
         autocomplete="off"
+        :disabled="gameOver"
         :placeholder="placeholder"
       />
     </div>
