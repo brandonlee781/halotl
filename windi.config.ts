@@ -1,3 +1,4 @@
+/* eslint-disable vue/max-len */
 import { defineConfig } from 'windicss/helpers'
 
 export default defineConfig({
@@ -12,8 +13,21 @@ export default defineConfig({
       },
     },
   },
-  alias: {
-    btn: 'px-4 py-2 mr-2 rounded-md hover:outline',
-    card: 'shadow border-b border-gray-200',
+  shortcuts: {
+    'flex-center': 'flex items-center justify-center',
+    content: 'max-w-[540px] mx-auto',
+    modal: {
+      '@apply':
+        'fixed top-[50%] left-[50%] max-w-[600px] max-h-full p-6 bg-white z-5 md:p-40px',
+      transform: 'translate(-50%, -50%)',
+      'box-shadow': '0 0 20px rgb(0 0 0 / 25%)',
+      width: 'calc(100vw - 40px)',
+    },
+    'modal-wrapper': {
+      '@apply':
+        'absolute top-0 left-0 w-[100vw] h-[100vh] bg-black bg-opacity-20 z-5',
+    },
+    'btn-close':
+      'absolute h-[36px] w-[36px] top-0 right-0 font-bold text-white uppercase cursor-pointer bg-hcsBlue md:font-14px',
   },
 })

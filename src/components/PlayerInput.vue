@@ -26,20 +26,22 @@ const enterGuess = (player: Player) => {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper relative content mb-12">
     <div class="combobox">
       <input
         v-model="current"
+        class="relative w-full font-extrabold p-4 border-hcsBlue text-hcsBlue focus:outline-none p-input"
         type="text"
         role="combobox"
         autocomplete="off"
         :placeholder="placeholder"
       />
     </div>
-    <div class="results">
-      <ul v-if="results.length">
+    <div class="absolute bg-white border-hcsBlue z-3 inset-x-0">
+      <ul v-if="results.length" class="list-none p-0 m-0">
         <li
           v-for="(player, index) in results"
+          class="px-4 py-6 font-medium cursor-pointer select-none hover:bg-[#4e78ba33] p-input"
           :key="index"
           @click="enterGuess(player)"
         >
@@ -51,70 +53,7 @@ const enterGuess = (player: Player) => {
 </template>
 
 <style scoped>
-.wrapper {
-  position: relative;
-  max-width: 540px;
-  margin: 0 auto;
-  margin-bottom: 3rem;
-}
-
-.wrapper input {
-  width: 100%;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 20px;
-  border: 1px solid #4e78ba;
-  color: #4e78ba;
-  position: relative;
-  z-index: 3;
-}
-
-.wrapper input:focus {
-  outline: 0;
-}
-
-@media (min-width: 768px) {
-  .wrapper input {
-    font-size: 18px;
-    padding: 30px;
-  }
-}
-
-.results {
-  position: absolute;
-  top: 89px;
-  left: 0;
-  right: 0;
-  z-index: 3;
-  background: white;
-  border: 1px solid #4e78ba;
-}
-
-.results ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.results ul li {
-  padding: 15px 20px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.results ul li:hover {
-  background-color: #4e78ba33;
-}
-
-@media (min-width: 768px) {
-  .results ul li {
-    padding: 18px 30px;
-    font-size: 18px;
-  }
+.p-input {
+  @apply p-4 md:(text-lg p-8);
 }
 </style>
