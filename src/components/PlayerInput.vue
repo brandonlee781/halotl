@@ -27,7 +27,7 @@ const enterGuess = (player: Player) => {
 
 <template>
   <div class="wrapper relative content mb-12">
-    <div class="combobox">
+    <div class="combobox border-b-2 border-b-hcsBlue">
       <input
         v-model="current"
         class="relative w-full font-extrabold p-4 border-hcsBlue text-hcsBlue focus:outline-none p-input"
