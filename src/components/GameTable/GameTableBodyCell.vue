@@ -22,7 +22,7 @@ type Comparison = {
   dir?: 'higher' | 'lower'
 }
 const comparison = $computed<Comparison>(() => {
-  const answerVal = answer[props.valueKey]!
+  const answerVal = answer.value[props.valueKey]!
   const diff = answerVal - props.value
   const close = Math.abs(diff) <= answerVal * 0.1
   if (answerVal === props.value) return { status: 'correct' }

@@ -18,7 +18,7 @@ const { gameOver } = useGuess()
 
 <template>
   <GameTableRow>
-    <GameTableCell :status="lastRow && gameOver">
+    <GameTableCell :status="lastRow && gameOver ? gameOver : null">
       <div>
         <div class="text">{{ name }}</div>
       </div>
