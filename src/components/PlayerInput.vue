@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import useGuess, { Player } from '@/composables/useGuess'
+import useGuess from '@/composables/useGuess'
 import statsJson from '@/stats.json'
+import { Player } from '@/store/guesses'
 
 const { guesses, gameOver, checkGuess } = useGuess()
 let current = $ref<string>()
@@ -34,7 +35,7 @@ const enterGuess = (player: Player) => {
         type="text"
         role="combobox"
         autocomplete="off"
-        :disabled="gameOver"
+        :disabled="!!gameOver"
         :placeholder="placeholder"
       />
     </div>

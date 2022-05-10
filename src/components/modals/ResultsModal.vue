@@ -60,10 +60,10 @@ const getSrc = (image: string) => {
           <div
             :class="{
               'border-t-1 border-b-1 pt-40px pb-30px px-10px text-hcsBlue': true,
-              '!border-b-red-900 !border-t-red-900': gameOver === 'lose',
+              '!border-b-red-900 !border-t-red-900': gameOver === 'loss',
             }"
           >
-            <template v-if="gameOver === 'lose'">
+            <template v-if="gameOver === 'loss'">
               <h3>Sorry, the correct answer is</h3>
               <h2>{{ answer.name }}</h2>
               <h3>You can try again tomorrow!</h3>

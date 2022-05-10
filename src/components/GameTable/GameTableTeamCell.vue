@@ -12,9 +12,9 @@ const region = $computed(() => {
   return statsJson.find(s => s.teamName === props.team)?.region
 })
 const comparison = $computed(() => {
-  if (props.team === answer.teamName) {
+  if (props.team === answer.value.teamName) {
     return 'correct'
-  } else if (region === answer.region) {
+  } else if (region === answer.value.region) {
     return 'close'
   }
   return null
